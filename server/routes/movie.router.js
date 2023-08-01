@@ -16,6 +16,10 @@ router.get('/', (req, res) => {
 
 });
 
+router.get('/query', (req, res) => {
+  // start here
+});
+
 router.post('/', (req, res) => {
   console.log(req.body);
   // RETURNING "id" will give us back the id of the created movie
