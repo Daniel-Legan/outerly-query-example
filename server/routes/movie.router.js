@@ -1,6 +1,8 @@
 const express = require('express');
+const axios = require('axios');
 const router = express.Router();
 const pool = require('../modules/pool')
+require('dotenv').config(); // Load environment variables from .env file
 
 router.get('/', (req, res) => {
 
@@ -16,8 +18,18 @@ router.get('/', (req, res) => {
 
 });
 
-router.get('/query', (req, res) => {
-  // start here
+router.post('/query', async (req, res) => {
+  const { latitude, longitude, searchQuery } = req.body;
+  const apiKey = process.env.GOOGLE_MAPS_API_KEY; // Retrieve the API key from environment variables
+  const apiUrl = `https://maps.googleapis.com/maps/api/place/textsearch/json?key=${apiKey}&type=establishment&location=${latitude},${longitude}&radius=1000&query=${searchQuery}`;
+
+  try {
+    const response = await axios.get(apiUrl);
+    res.json(response.data);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Failed to fetch data from Google Maps API' });
+  }
 });
 
 router.post('/', (req, res) => {

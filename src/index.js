@@ -31,11 +31,14 @@ function* fetchAllMovies() {
 
 function* fetchQuery(action) {
     console.log('action.payload', action.payload);
+    const backendApiUrl = '/api/movie/query';
     try {
-        const places = yield axios.get('/api/movie/query', {
-            params: action.payload // send the action.payload to server
+        const response = yield axios.post(backendApiUrl, {
+            latitude: action.payload.latitude,
+            longitude: action.payload.longitude,
+            searchQuery: action.payload.searchQuery
         });
-        console.log(places.data);
+        console.log(response.data);
     } catch {
         console.log('get all error');
     }
