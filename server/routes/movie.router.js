@@ -21,7 +21,7 @@ router.get('/', (req, res) => {
 router.post('/query', async (req, res) => {
   const { latitude, longitude, searchQuery } = req.body;
   const apiKey = process.env.GOOGLE_MAPS_API_KEY; // Retrieve the API key from environment variables
-  const apiUrl = `https://maps.googleapis.com/maps/api/place/textsearch/json?key=${apiKey}&type=establishment&location=${latitude},${longitude}&radius=1000&query=${searchQuery}`;
+  const apiUrl = `https://maps.googleapis.com/maps/api/place/textsearch/json?key=${apiKey}&type=hiking_trail&location=${latitude},${longitude}&radius=1000&query=${searchQuery}`;
 
   try {
     const response = await axios.get(apiUrl);

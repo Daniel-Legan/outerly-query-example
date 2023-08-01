@@ -31,7 +31,7 @@ function* fetchAllMovies() {
 
 function* fetchQuery(action) {
     console.log('action.payload', action.payload);
-    const backendApiUrl = '/api/movie/query';
+    const backendApiUrl = '/api/movie/query'; // Used from pre-existing router
     try {
         const response = yield axios.post(backendApiUrl, {
             latitude: action.payload.latitude,
@@ -48,6 +48,7 @@ function* fetchQuery(action) {
 const sagaMiddleware = createSagaMiddleware();
 
 // Used to store movies returned from the server
+// Ignore, Kay
 const movies = (state = [], action) => {
     switch (action.type) {
         case 'SET_MOVIES':
@@ -58,6 +59,7 @@ const movies = (state = [], action) => {
 }
 
 // Used to store the movie genres
+// Ignore, Kay
 const genres = (state = [], action) => {
     switch (action.type) {
         case 'SET_GENRES':
